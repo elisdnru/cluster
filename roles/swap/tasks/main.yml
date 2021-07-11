@@ -1,0 +1,32 @@
+---
+-   name: Check if swap file exists
+    stat:
+        path: "{{ swap_file }}"
+    register: swap_file_check
+
+-   name: Swap file
+    command: fallocate -l {{ swap_size }} {{ swap_file }}
+    when: not swap_file_check.stat.exists
+
+-   name: Permissions on swap file
+    file:
+        path: "{{ swap_file }}"
+        mode: 0600
+
+-   name: Make swap
+    command: mkswap {{ swap_file }}
+    when: not swap_file_check.stat.exists
+
+-   name: Swap in fstab
+    lineinfile:
+        dest: /etc/fstab
+        regexp: "{{ swap_file }}"
+        line: "{{ swap_file }} none swap sw 0 0"
+
+-   name: Swap On
+    command: swapon -a
+
+-   name: Swapiness
+    sysctl:
+        name: vm.swappiness
+        value: "1"

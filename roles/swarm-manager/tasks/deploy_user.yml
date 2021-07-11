@@ -1,0 +1,9 @@
+---
+-   name: Deploy user
+    user:
+        name: deploy
+        password: '!'
+        groups:
+            - docker
+        shell: /bin/bash
+        state: present
