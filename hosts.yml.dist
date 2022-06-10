@@ -11,6 +11,11 @@ all:
                 db_hostname: worker-db
         workers:
             hosts:
+                worker-db:
+                    ansible_connection: ssh
+                    ansible_user: root
+                    ansible_host: 0.0.0.0
+                    ansible_port: 22
 
     vars:
         cache_registry: https://mirror.gcr.io
