@@ -12,6 +12,3 @@ generate-deploy-key:
 
 authorize-deploy:
 	ansible-playbook -i hosts.yml authorize-deploy.yml
-
-docker-login:
-	ansible-playbook -i hosts.yml docker-login.yml
