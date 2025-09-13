@@ -45,7 +45,7 @@
 -   name: Periodic Docker prune
     cron:
         name: docker-prune
-        job: 'docker system prune -af --filter "until=$((5*24))h"'
+        job: 'docker system prune -af --filter "until=120h"'
         minute: '0'
         hour: '1'
 
